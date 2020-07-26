@@ -8,12 +8,19 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Environment;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
+    // ファイルメニュー
+    private static final int MENUID_FILE = 0;
+    // 外部メディアの初期フォルダ
+    private String m_strInitialDir = Environment.getExternalStorageDirectory().getPath();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-/*        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
- */
     }
 
     @Override
@@ -49,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_select_folder) {
+            // ダイアログオブジェクト
+            FileSelectionDialog dlg = new FileSelectionDialog(this, (FileSelectionDialog.OnFileSelectListener)this);
+            dlg.show(new File(m_strInitialDir));
             return true;
         }
 
