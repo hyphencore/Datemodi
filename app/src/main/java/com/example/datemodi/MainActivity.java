@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_select_folder) {
             // ダイアログオブジェクト
-            FileSelectionDialog dlg = new FileSelectionDialog(this, (FileSelectionDialog.OnFileSelectListener)this);
+            FileSelectionDialog dlg = new FileSelectionDialog(this, FileSelectionDialog.OnFileSelectListener);
             dlg.show(new File(m_strInitialDir));
             return true;
         }
